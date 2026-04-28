@@ -41,7 +41,6 @@ std::vector<Ray> Controller::CastRays() {
     std::vector<QPointF> targets;
     std::vector<std::pair<QPointF, QPointF>> edges;
 
-    // 1. Собираем все вершины и все ребра
     for (const auto& poly : polygons_) {
         const auto& v = poly.GetVertices();
         if (v.empty()) {
@@ -53,7 +52,6 @@ std::vector<Ray> Controller::CastRays() {
         }
     }
 
-    // 2. Находим пересечения всех ребер (чтобы тени не протекали сквозь пересекающиеся полигоны)
     for (size_t i = 0; i < edges.size(); ++i) {
         for (size_t j = i + 1; j < edges.size(); ++j) {
             QPointF a = edges[i].first, b = edges[i].second;
@@ -61,7 +59,7 @@ std::vector<Ray> Controller::CastRays() {
 
             double den = (b.x() - a.x()) * (d.y() - c.y()) - (b.y() - a.y()) * (d.x() - c.x());
             if (std::abs(den) < 1e-9) {
-                continue;  // Параллельны
+                continue;
             }
 
             double t =
@@ -69,7 +67,6 @@ std::vector<Ray> Controller::CastRays() {
             double u =
                 ((c.x() - a.x()) * (b.y() - a.y()) - (c.y() - a.y()) * (b.x() - a.x())) / den;
 
-            // Если есть точка пересечения, добавляем ее как цель для луча
             if (t > 1e-4 && t < 1.0 - 1e-4 && u > 1e-4 && u < 1.0 - 1e-4) {
                 targets.push_back(
                     QPointF(a.x() + t * (b.x() - a.x()), a.y() + t * (b.y() - a.y())));
@@ -78,7 +75,6 @@ std::vector<Ray> Controller::CastRays() {
     }
 
     std::vector<Ray> rays;
-    // 3. Пускаем лучи во все цели
     for (const auto& target : targets) {
         double angle = std::atan2(target.y() - light_source_.y(), target.x() - light_source_.x());
 
