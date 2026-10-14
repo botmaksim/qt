@@ -4,7 +4,6 @@
 [![Qt](https://img.shields.io/badge/Qt-GUI%20Framework-green.svg)](https://www.qt.io/)
 [![Bazel](https://img.shields.io/badge/Bazel-Build%20System-43A047.svg)](https://bazel.build/)
 [![Clang-Tidy](https://img.shields.io/badge/Clang--Tidy-Linted-00599C.svg)](https://clang.llvm.org/extra/clang-tidy/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An educational C++ and Qt engineering repository developed for the Advanced Qt Software Engineering curriculum at Belarusian State University, Faculty of Applied Mathematics and Computer Science. The project utilizes Bazel for modular dependency management and enforces code quality via Clang-Tidy and Clang-Format.
 
@@ -80,9 +79,3 @@ qt/
 ├── demos/                   # Interactive demonstration widgets
 └── tools/                   # Build and lint helper scripts
 ```
-
----
-
-## License
-
-This project is open-source software licensed under the [MIT License](LICENSE).
